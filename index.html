@@ -199,7 +199,8 @@
   @media(max-width:960px){
     .hero { grid-template-columns:1fr; padding:8rem 5vw 4rem; min-height:auto; gap:3rem; }
     .about-inner { grid-template-columns:1fr; }
-    .about-avatar { aspect-ratio:3/2; max-width:300px; }
+    .about-avatar { aspect-ratio:auto !important; height:auto !important; max-width:300px; overflow:visible; }
+    .about-avatar > img { width:100%; height:auto !important; object-fit:contain !important; object-position:center top; }
     .contact-inner { grid-template-columns:1fr; }
     .contact-info { padding-top:0; }
     footer { flex-direction:column; text-align:center; }
