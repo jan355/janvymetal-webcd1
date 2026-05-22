@@ -50,6 +50,7 @@
   }
   .nav-name { font-family:'Manrope','Avenir Next','Avenir',sans-serif; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:.55rem; }
   .nav-name::before { content:''; width:10px; height:10px; border-radius:3px; background:var(--accent); display:inline-block; }
+  .nav-right { display:flex; align-items:center; gap:1.25rem; }
   .nav-links { display:flex; gap:1.75rem; list-style:none; align-items:center; }
   .nav-links a { font-size:14px; color:var(--muted); transition:color .25s; position:relative; padding:.25rem 0; display:inline-block; }
   .nav-links a::after { content:''; position:absolute; left:0; bottom:0; height:1.5px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left center; transition:transform .35s cubic-bezier(.4,0,.2,1); }
@@ -57,6 +58,26 @@
   .nav-links a:hover::after,
   .nav-links a.active::after { transform:scaleX(1); }
   .nav-links a.active { color:var(--ink); }
+  .partner-nav-button { padding:.62rem 1rem; border-radius:100px; border:1px solid var(--accent); background:transparent; color:var(--accent); font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; transition:background .2s, color .2s, border-color .2s, transform .2s; white-space:nowrap; }
+  .partner-nav-button:hover { background:var(--accent); border-color:var(--accent); color:#fff; transform:translateY(-1px); }
+
+  /* PARTNER LOGIN */
+  .partner-modal { position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:1.25rem; background:rgba(24,24,22,.42); backdrop-filter:blur(10px); opacity:0; pointer-events:none; transition:opacity .22s ease; }
+  .partner-modal.is-open { opacity:1; pointer-events:auto; }
+  .partner-dialog { width:min(100%,420px); background:var(--bg); border:0.5px solid var(--border); border-radius:18px; box-shadow:0 24px 80px rgba(0,0,0,.18); padding:1.6rem; transform:translateY(10px) scale(.98); transition:transform .22s ease; }
+  .partner-modal.is-open .partner-dialog { transform:none; }
+  .partner-dialog-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1.25rem; }
+  .partner-dialog h2 { font-size:1.45rem; margin:0 0 .35rem; letter-spacing:-.02em; color:var(--accent); }
+  .partner-dialog p { color:var(--muted); font-size:14px; line-height:1.55; }
+  .partner-close { width:36px; height:36px; border-radius:50%; border:0.5px solid rgba(45,90,61,0.22); background:var(--accent-soft); color:var(--accent); cursor:pointer; font-size:22px; line-height:1; display:grid; place-items:center; flex:0 0 auto; }
+  .partner-close:hover { border-color:var(--accent); }
+  .partner-login-form { gap:.85rem; }
+  .partner-login-form label { display:flex; flex-direction:column; gap:.35rem; color:var(--accent); font-size:13px; font-weight:600; }
+  .partner-login-form input { width:100%; color:var(--accent); }
+  .partner-login-form button { width:100%; justify-content:center; align-self:stretch; margin-top:.2rem; }
+  .partner-login-form button { background:var(--accent); }
+  .partner-login-form button:hover { background:var(--accent-2); }
+  .partner-login-note { min-height:20px; margin-top:.15rem; font-size:13px; color:var(--accent); }
 
   /* SECTIONS */
   .section { padding:6rem 5vw; }
@@ -209,6 +230,8 @@
   @media(max-width:600px){
     nav { padding:.85rem 5vw; }
     .nav-links { display:none; }
+    .partner-nav-button { padding:.58rem .85rem; font-size:12px; }
+    .partner-dialog { padding:1.25rem; border-radius:16px; }
   }
 </style>
 </head>
@@ -223,7 +246,32 @@
     <li><a href="#reference">Reference</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
+  <button class="partner-nav-button" type="button" data-partner-open>Partnerská sekce</button>
 </nav>
+
+<div class="partner-modal" id="partner-login" aria-hidden="true">
+  <div class="partner-dialog" role="dialog" aria-modal="true" aria-labelledby="partner-login-title">
+    <div class="partner-dialog-header">
+      <div>
+        <h2 id="partner-login-title">Partnerská sekce</h2>
+        <p>Přihlaste se e-mailem a heslem, které jste obdrželi pro svůj klientský prostor.</p>
+      </div>
+      <button class="partner-close" type="button" aria-label="Zavřít přihlášení" data-partner-close>&times;</button>
+    </div>
+    <form class="partner-login-form" data-partner-form>
+      <label>
+        E-mail
+        <input type="email" name="email" autocomplete="email" placeholder="vas@email.cz" required>
+      </label>
+      <label>
+        Heslo
+        <input type="password" name="password" autocomplete="current-password" placeholder="Vaše heslo" required>
+      </label>
+      <button type="submit">Vstoupit do sekce</button>
+      <div class="partner-login-note" data-partner-note aria-live="polite"></div>
+    </form>
+  </div>
+</div>
 
 <div class="hero" id="top">
   <div class="hero-left">
@@ -413,6 +461,44 @@
       window.setTimeout(() => link.classList.remove('copied'), 1600);
     });
   });
+
+  (function() {
+    const modal = document.querySelector('#partner-login');
+    const openButton = document.querySelector('[data-partner-open]');
+    const closeButton = document.querySelector('[data-partner-close]');
+    const form = document.querySelector('[data-partner-form]');
+    const note = document.querySelector('[data-partner-note]');
+    const emailInput = modal?.querySelector('input[type="email"]');
+
+    if (!modal || !openButton || !closeButton || !form || !note) return;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      window.setTimeout(() => emailInput?.focus(), 80);
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      note.textContent = '';
+    }
+
+    openButton.addEventListener('click', openModal);
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      note.textContent = 'Ukázkový vstup je připravený. Skutečné účty a soubory napojíme v další fázi.';
+    });
+  })();
 
   // Scroll-spy nav: highlights link of section currently in view
   (function() {
