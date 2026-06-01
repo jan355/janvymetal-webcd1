@@ -35,7 +35,7 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; overflow-x:hidden; }
-  body { font-family:'Manrope','Avenir Next','Avenir',sans-serif; background:var(--bg); color:var(--ink); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  body { font-family:'Manrope','Avenir Next','Avenir',sans-serif; background:var(--bg); color:var(--ink); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:inherit; text-decoration:none; }
   ::selection { background:var(--accent); color:#fff; }
 
@@ -196,6 +196,9 @@
 
   /* CONTACT */
   .contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+  .contact-inner > * { min-width:0; }
+  .calendly-inline-widget { max-width:100%; overflow:hidden; }
+  .calendly-inline-widget iframe { width:100% !important; max-width:100% !important; min-width:0 !important; }
   .contact-info { padding-top:3rem; }
   .contact-info p { color:var(--muted); font-size:1rem; line-height:1.7; margin-bottom:2rem; max-width:440px; }
   .contact-links { display:flex; flex-direction:column; gap:.75rem; }
@@ -458,7 +461,7 @@
         <a href="https://www.linkedin.com/in/jan-vym%C4%9Btal-38b80785/" class="contact-link"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 10v8M8 6v.01M12 18v-5a3 3 0 0 1 6 0v5"/></svg>LinkedIn</a>
       </div>
     </div>
-    <div class="calendly-inline-widget" data-url="https://calendly.com/jan-9cbr/test2" style="min-width:320px;height:700px;"></div>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/jan-9cbr/test2" style="width:100%;height:700px;"></div>
   </div>
 </section>
 
