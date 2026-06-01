@@ -49,6 +49,7 @@
   }
   .nav-name { font-family:'Manrope','Avenir Next','Avenir',sans-serif; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:.55rem; }
   .nav-name::before { content:''; width:10px; height:10px; border-radius:3px; background:var(--accent); display:inline-block; }
+  .nav-right { display:flex; align-items:center; gap:1.25rem; }
   .nav-links { display:flex; gap:1.75rem; list-style:none; align-items:center; }
   .nav-links a { font-size:14px; color:var(--muted); transition:color .25s; position:relative; padding:.25rem 0; display:inline-block; }
   .nav-links a::after { content:''; position:absolute; left:0; bottom:0; height:1.5px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left center; transition:transform .35s cubic-bezier(.4,0,.2,1); }
@@ -56,6 +57,25 @@
   .nav-links a:hover::after,
   .nav-links a.active::after { transform:scaleX(1); }
   .nav-links a.active { color:var(--ink); }
+  .partner-nav-button { padding:.62rem 1rem; border-radius:100px; border:1px solid var(--accent); background:transparent; color:var(--accent); font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; transition:background .2s, color .2s, border-color .2s, transform .2s; white-space:nowrap; }
+  .partner-nav-button:hover { background:var(--accent); border-color:var(--accent); color:#fff; transform:translateY(-1px); }
+
+  /* PARTNER LOGIN */
+  .partner-modal { position:fixed; inset:0; z-index:400; display:grid; place-items:center; padding:1.25rem; background:rgba(24,24,22,.42); backdrop-filter:blur(10px); opacity:0; pointer-events:none; transition:opacity .22s ease; }
+  .partner-modal.is-open { opacity:1; pointer-events:auto; }
+  .partner-dialog { width:min(100%,420px); background:var(--bg); border:0.5px solid var(--border); border-radius:18px; box-shadow:0 24px 80px rgba(0,0,0,.18); padding:1.6rem; transform:translateY(10px) scale(.98); transition:transform .22s ease; }
+  .partner-modal.is-open .partner-dialog { transform:none; }
+  .partner-dialog-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1.25rem; }
+  .partner-dialog h2 { font-size:1.45rem; margin:0 0 .35rem; letter-spacing:-.02em; color:var(--accent); }
+  .partner-dialog p { color:var(--muted); font-size:14px; line-height:1.55; }
+  .partner-close { width:36px; height:36px; border-radius:50%; border:0.5px solid rgba(45,90,61,.22); background:var(--accent-soft); color:var(--accent); cursor:pointer; font-size:22px; line-height:1; display:grid; place-items:center; flex:0 0 auto; }
+  .partner-close:hover { border-color:var(--accent); }
+  .partner-login-form { gap:.85rem; }
+  .partner-login-form label { display:flex; flex-direction:column; gap:.35rem; color:var(--accent); font-size:13px; font-weight:600; }
+  .partner-login-form input { width:100%; color:var(--accent); }
+  .partner-login-form button { width:100%; justify-content:center; align-self:stretch; margin-top:.2rem; background:var(--accent); }
+  .partner-login-form button:hover { background:var(--accent-2); }
+  .partner-login-note { min-height:20px; margin-top:.15rem; font-size:13px; color:var(--accent); }
 
   /* SECTIONS */
   .section { padding:6rem 5vw; }
@@ -74,7 +94,10 @@
   .lead-light { color:rgba(255,255,255,0.6); }
 
   /* HERO */
-  .hero { padding:10rem 5vw 6rem; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; min-height:90vh; position:relative; }
+  .hero { padding:10rem 5vw 6rem; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; min-height:90vh; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.75; background-image:linear-gradient(90deg, rgba(45,90,61,.13) 1px, transparent 1px), linear-gradient(rgba(45,90,61,.13) 1px, transparent 1px); background-size:56px 56px; background-position:18px 14px; }
+  .hero::after { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 18% 26%, rgba(45,90,61,.04), transparent 28%), linear-gradient(90deg, rgba(250,249,246,.72), rgba(250,249,246,.42) 46%, rgba(250,249,246,.74)); }
+  .hero-left, .hero-right { position:relative; z-index:1; }
   .hero-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-size:11px; font-weight:500; padding:.4rem .9rem .4rem .55rem; border-radius:100px; background:var(--accent-soft); color:var(--accent); margin-bottom:1.5rem; letter-spacing:.12em; text-transform:uppercase; }
   .hero-eyebrow .dot { width:8px; height:8px; border-radius:50%; background:var(--accent-2); position:relative; }
   .hero-eyebrow .dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; background:var(--accent-2); opacity:.4; animation:pulse 2s infinite; }
@@ -167,11 +190,16 @@
 
   /* CONTACT */
   .contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+  .contact-info { padding-top:3rem; }
   .contact-info p { color:var(--muted); font-size:1rem; line-height:1.7; margin-bottom:2rem; max-width:440px; }
   .contact-links { display:flex; flex-direction:column; gap:.75rem; }
   .contact-link { font-size:15px; font-weight:500; color:var(--ink); display:inline-flex; align-items:center; gap:.65rem; transition:color .2s, border-color .2s; padding:.6rem .9rem; background:var(--bg); border:0.5px solid var(--border); border-radius:100px; width:fit-content; }
   .contact-link:hover { color:var(--accent); border-color:var(--accent); }
   .contact-link svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.6; }
+  .copy-email { cursor:pointer; position:relative; }
+  .copy-email::after { content:'Klikněte na adresu pro kopírovat'; position:absolute; left:100%; top:50%; transform:translate(10px,-50%); background:var(--ink); color:#fff; border-radius:100px; padding:.35rem .65rem; font-size:12px; opacity:0; pointer-events:none; transition:opacity .2s; white-space:nowrap; }
+  .copy-email:hover::after, .copy-email.copied::after { opacity:1; }
+  .copy-email.copied::after { content:'Zkopírováno'; }
   form { display:flex; flex-direction:column; gap:.75rem; }
   form input, form textarea, form select { padding:.9rem 1.1rem; border-radius:14px; border:0.5px solid var(--border); font-size:14px; font-family:inherit; background:var(--bg); color:var(--ink); outline:none; transition:border-color .2s; }
   form input:focus, form textarea:focus, form select:focus { border-color:var(--accent); }
@@ -191,36 +219,27 @@
   @media(max-width:960px){
     .hero { grid-template-columns:1fr; padding:8rem 5vw 4rem; min-height:auto; gap:3rem; }
     .about-inner { grid-template-columns:1fr; }
-    .about-avatar { aspect-ratio:3/2; max-width:300px; }
+    .about-avatar { aspect-ratio:auto !important; height:auto !important; max-width:300px; overflow:visible; }
+    .about-avatar > img { width:100%; height:auto !important; object-fit:contain !important; object-position:center top; }
     .contact-inner { grid-template-columns:1fr; }
+    .contact-info { padding-top:0; }
     footer { flex-direction:column; text-align:center; }
   }
   @media(max-width:600px){
     nav { padding:.85rem 5vw; }
     .nav-links { display:none; }
+    .nav-right { gap:0; }
+    .partner-nav-button { padding:.58rem .85rem; font-size:12px; }
+    .partner-dialog { padding:1.25rem; border-radius:16px; }
   }
 
-  /* IMPROVEMENTS PANEL */
-  .improvements-toggle { position:fixed; bottom:1.5rem; right:1.5rem; z-index:200; background:var(--ink); color:#fff; border:none; border-radius:100px; padding:.85rem 1.25rem; font-family:'Manrope','Avenir Next','Avenir',sans-serif; font-size:13.5px; font-weight:500; cursor:pointer; box-shadow:0 12px 40px rgba(0,0,0,0.18); display:inline-flex; align-items:center; gap:.55rem; transition:all .2s; }
-  .improvements-toggle:hover { background:var(--accent); transform:translateY(-2px); }
-  .improvements-toggle .badge { background:var(--accent-2); color:#fff; font-size:11px; font-weight:700; padding:1px 7px; border-radius:100px; }
-  .improvements-panel { position:fixed; bottom:0; right:0; width:min(440px, 100vw); height:100vh; background:var(--bg); z-index:300; box-shadow:-20px 0 60px rgba(0,0,0,0.15); transform:translateX(100%); transition:transform .35s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column; }
-  .improvements-panel.open { transform:translateX(0); }
-  .ip-head { padding:1.5rem 1.75rem; border-bottom:0.5px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
-  .ip-head h3 { font-size:1.05rem; font-weight:700; }
-  .ip-head .close { width:32px; height:32px; border-radius:50%; border:0.5px solid var(--border); background:transparent; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; color:var(--muted); }
-  .ip-body { padding:1.5rem 1.75rem 2rem; overflow-y:auto; flex:1; }
-  .ip-intro { font-size:13.5px; color:var(--muted); line-height:1.6; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:0.5px dashed var(--border); }
-  .imp { margin-bottom:1.4rem; padding-left:2.2rem; position:relative; }
-  .imp-num { position:absolute; left:0; top:0; width:26px; height:26px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-family:'Manrope','Avenir Next','Avenir',sans-serif; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; }
-  .imp h4 { font-size:14px; font-weight:600; margin-bottom:.25rem; letter-spacing:-.005em; }
-  .imp p { font-size:13px; color:var(--muted); line-height:1.55; }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-name">AI pro projektanty</div>
+  <a href="#top" class="nav-name">AI pro projektanty</a>
+  <div class="nav-right">
   <ul class="nav-links">
     <li><a href="#zamereni">Zaměření</a></li>
     <li><a href="#sluzby">Služby</a></li>
@@ -228,9 +247,35 @@
     <li><a href="#reference">Reference</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
+  <button class="partner-nav-button" type="button" data-partner-open>Partnerská sekce</button>
+  </div>
 </nav>
 
-<div class="hero">
+<div class="partner-modal" id="partner-login" aria-hidden="true">
+  <div class="partner-dialog" role="dialog" aria-modal="true" aria-labelledby="partner-login-title">
+    <div class="partner-dialog-header">
+      <div>
+        <h2 id="partner-login-title">Partnerská sekce</h2>
+        <p>Přihlaste se e-mailem a heslem, které jste obdrželi pro svůj klientský prostor.</p>
+      </div>
+      <button class="partner-close" type="button" aria-label="Zavřít přihlášení" data-partner-close>&times;</button>
+    </div>
+    <form class="partner-login-form" data-partner-form>
+      <label>
+        E-mail
+        <input type="email" name="email" autocomplete="email" placeholder="vas@email.cz" required>
+      </label>
+      <label>
+        Heslo
+        <input type="password" name="password" autocomplete="current-password" placeholder="Vaše heslo" required>
+      </label>
+      <button type="submit">Vstoupit do sekce</button>
+      <div class="partner-login-note" data-partner-note aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<div class="hero" id="top">
   <div class="hero-left">
     <span class="hero-eyebrow"><span class="dot"></span>Lektor a konzultant</span>
     <h1>Jan<br><em>Vymětal</em></h1>
@@ -346,7 +391,7 @@
       <span class="label">O mně</span>
       <h2>Rozumím projekci.<br>Umím učit.</h2>
       <p>Nejsem generický AI kouč. Strávil jsem <strong>15 let na obchodně-technické pozici v softwarové firmě pro projekční kanceláře</strong>. Zblízka jsem viděl, co projektanty silničního, TZB i pozemního oboru každý den zdržuje.</p>
-      <p>Díky svému <strong>pedagogickému zázemí a lektorské praxi</strong> dokážu složité věci vysvětlit tak, aby si je každý odnesl a skutečně použil. Jako spolehlivou denní rutinu.</p>
+      <p>Díky svému <strong>pedagogickému zázemí a lektorské praxi</strong> dokážu složité věci vysvětlit tak, aby je každý pochopil a skutečně použil. Jako spolehlivou denní rutinu.</p>
       <p>Baví mě stavět metodiky s AI: práce s technickými texty, AI asistenti pro opakující se procesy, propojení CAD a automatizace. Přesně tyhle věci s vámi vyřeším na míru.</p>
       <p><strong>Ve zkratce:</strong></p>
       <div class="creds">
@@ -381,27 +426,15 @@
   <div class="contact-inner">
     <div class="contact-info">
       <span class="label">Kontakt</span>
-      <h2>Ozvěte se mi.</h2>
-      <p>Máte zájem o kurz, konzultaci nebo jen chcete vědět, kde začít? Rád si poslechnu, zajímá mě váš příběh s AI.</p>
+      <h2>Ozvěte se mi, nebo si rezervujte online schůzku.</h2>
+      <p>Máte zájem o kurz, konzultaci nebo jen chcete vědět, kde začít? Rád si vás poslechnu, zajímá mě váš příběh s AI.</p>
       <div class="contact-links">
-        <a href="mailto:jan@janvymetal.cz" class="contact-link"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>jan@janvymetal.cz</a>
+        <a href="mailto:jan@janvymetal.cz" class="contact-link copy-email" data-email="jan@janvymetal.cz" title="Kopírovat e-mail"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>jan@janvymetal.cz</a>
         <a href="tel:+420777422456" class="contact-link"><svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 0 1-1.1 1 19.86 19.86 0 0 1-8.66-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 3.18 4.11 1 1 0 0 1 4.18 3h4.09a1 1 0 0 1 1 .75 12.84 12.84 0 0 0 .7 2.81 1 1 0 0 1-.22 1L8.09 9.09a16 16 0 0 0 6 6l1.5-1.66a1 1 0 0 1 1-.22 12.84 12.84 0 0 0 2.81.7 1 1 0 0 1 .75 1z"/></svg>+420 777 422 456</a>
         <a href="https://www.linkedin.com/in/jan-vym%C4%9Btal-38b80785/" class="contact-link"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 10v8M8 6v.01M12 18v-5a3 3 0 0 1 6 0v5"/></svg>LinkedIn</a>
       </div>
     </div>
-    <form>
-      <input type="text" placeholder="Jméno">
-      <input type="email" placeholder="E-mail">
-      <select>
-        <option value="" disabled selected>Zájem o…</option>
-        <option>Skupinový jednodenní kurz</option>
-        <option>Individuální konzultace</option>
-        <option>Agentická AI</option>
-        <option>Nezávazná konzultace</option>
-      </select>
-      <textarea placeholder="Stručně popište, s čím potřebujete pomoci…"></textarea>
-      <button type="submit">Odeslat zprávu</button>
-    </form>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/jan-9cbr/test2" style="min-width:320px;height:700px;"></div>
   </div>
 </section>
 
@@ -411,63 +444,66 @@
   <div>© 2026</div>
 </footer>
 
-<!-- IMPROVEMENTS PANEL -->
-<button class="improvements-toggle" onclick="document.querySelector('.improvements-panel').classList.add('open')">
-  Co se změnilo <span class="badge">8</span>
-</button>
-<div class="improvements-panel">
-  <div class="ip-head">
-    <h3>Pouze grafické změny</h3>
-    <button class="close" onclick="document.querySelector('.improvements-panel').classList.remove('open')">×</button>
-  </div>
-  <div class="ip-body">
-    <p class="ip-intro">Text zachován v původním znění. Změny se týkají pouze vizuální stránky a interakce.</p>
-
-    <div class="imp"><div class="imp-num">1</div>
-      <h4>Hero — pulzující eyebrow</h4>
-      <p>„Lektor a konzultant" je nyní v pilulkovém štítku se zelenou tečkou, která jemně pulzuje. Funguje to jako vizuální háček a zvýrazňuje to vaši roli.</p>
-    </div>
-
-    <div class="imp"><div class="imp-num">2</div>
-      <h4>Obory jako čipy</h4>
-      <p>„Pozemní stavby · Dopravní infrastruktura · TZB" už nejsou v textovém štítku — jsou to samostatné čipy s jemným orámováním. Lépe se vnímají jako rovnocenné kategorie.</p>
-    </div>
-
-    <div class="imp"><div class="imp-num">3</div>
-      <h4>Hero bubliny v rámečku</h4>
-      <p>Konverzace je nyní v zarámovaném panelu s popiskem „Ukázka asistenta pro projektanta". Kontext návštěvníkovi okamžitě řekne, na co se dívá. Bubliny mají i drobnou postupnou animaci.</p>
-    </div>
-
-    <div class="imp"><div class="imp-num">4</div>
-      <h4>Statistiky odděleny linkou</h4>
-      <p>„15+ let" a „3 úrovně" jsou nyní vizuálně oddělené tenkou linkou — jasně signalizují „toto je jiný typ informace než nadpis".</p>
-    </div>
-
-    <div class="imp"><div class="imp-num">5</div>
-      <h4>Sekce mají strukturovaný label</h4>
-      <p>Každý nadpis sekce má drobnou linku před textem labelu. Drobnost, ale dělá z náhodných slov jasný systém.</p>
-    </div>
-
-    <div class="imp"><div class="imp-num">6</div>
-      <h4>Karty služeb — výraznější hover</h4>
-      <p>Karty se při najetí jemně zvednou se stínem a mírně tmavším okrajem. Podle ÚX by mělo být vidět, že jsou klikatelné.</p>
-    </div>
-
-    <div class="imp"><div class="imp-num">7</div>
-      <h4>Loga v ohraničené mřížce</h4>
-      <p>Místo volného flex-wrapu jsou loga v rovnoměrné gridové mřížce s tenkými linkami. Působí to jako jeden celek a je to symetrické na jakékoli velikosti obrazovky.</p>
-    </div>
-
-    <div class="imp"><div class="imp-num">8</div>
-      <h4>Kontakty jako pilulkové odkazy</h4>
-      <p>E-mail, telefon a LinkedIn mají nyní jednotný styl pilulkových buttonů s jemnou ikonou. Vypadá to organizovaně a jsou ostře oddělené od textu výše.</p>
-    </div>
-
-    <p class="ip-intro" style="margin-top:1.5rem; padding-top:1.25rem; border-top:0.5px dashed var(--border); border-bottom:none;"><strong>Pozn. k obsahu:</strong> Loga v původním souboru jsou base64-vložená (přímo v HTML). Pro jednodušší správu jsou nyní jako placeholdery — stačí vložit `&lt;img src="..."&gt;` zpátky. Stejně tak portrét v sekci „O mně".</p>
-  </div>
-</div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <script>
+  document.querySelectorAll('.copy-email').forEach((link) => {
+    link.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const email = link.dataset.email;
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch (error) {
+        const input = document.createElement('input');
+        input.value = email;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        input.remove();
+      }
+      link.classList.add('copied');
+      window.setTimeout(() => link.classList.remove('copied'), 1600);
+    });
+  });
+
+  (function() {
+    const modal = document.querySelector('#partner-login');
+    const openButton = document.querySelector('[data-partner-open]');
+    const closeButton = document.querySelector('[data-partner-close]');
+    const form = document.querySelector('[data-partner-form]');
+    const note = document.querySelector('[data-partner-note]');
+    const emailInput = modal?.querySelector('input[type="email"]');
+
+    if (!modal || !openButton || !closeButton || !form || !note) return;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      window.setTimeout(() => emailInput?.focus(), 80);
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      note.textContent = '';
+    }
+
+    openButton.addEventListener('click', openModal);
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      note.textContent = 'Ukázkový vstup je připravený. Skutečné účty a soubory napojíme v další fázi.';
+    });
+  })();
+
   // Scroll-spy nav: highlights link of section currently in view
   (function() {
     const links = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
