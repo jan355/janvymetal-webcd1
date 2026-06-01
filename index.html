@@ -95,10 +95,10 @@
 
   /* HERO */
   .hero { padding:10rem 5vw 6rem; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; min-height:90vh; position:relative; overflow:hidden; }
-  .hero::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.75; background-image:linear-gradient(90deg, rgba(45,90,61,.13) 1px, transparent 1px), linear-gradient(rgba(45,90,61,.13) 1px, transparent 1px); background-size:56px 56px; background-position:18px 14px; }
-  .hero::after { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 18% 26%, rgba(45,90,61,.04), transparent 28%), linear-gradient(90deg, rgba(250,249,246,.72), rgba(250,249,246,.42) 46%, rgba(250,249,246,.74)); }
+  .hero::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.94; background-image:linear-gradient(90deg, rgba(45,90,61,.23) 1px, transparent 1px), linear-gradient(rgba(45,90,61,.23) 1px, transparent 1px); background-size:56px 56px; background-position:18px 14px; }
+  .hero::after { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 18% 26%, rgba(45,90,61,.02), transparent 28%), linear-gradient(90deg, rgba(250,249,246,.44), rgba(250,249,246,.16) 46%, rgba(250,249,246,.46)); }
   .hero-left, .hero-right { position:relative; z-index:1; }
-  .hero-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-size:11px; font-weight:500; padding:.4rem .9rem .4rem .55rem; border-radius:100px; background:var(--accent-soft); color:var(--accent); margin-bottom:1.5rem; letter-spacing:.12em; text-transform:uppercase; }
+  .hero-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-size:11px; font-weight:500; padding:.4rem .9rem .4rem .55rem; border-radius:100px; background:#edf1ed; color:var(--accent); margin-bottom:1.5rem; letter-spacing:.12em; text-transform:uppercase; }
   .hero-eyebrow .dot { width:8px; height:8px; border-radius:50%; background:var(--accent-2); position:relative; }
   .hero-eyebrow .dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; background:var(--accent-2); opacity:.4; animation:pulse 2s infinite; }
   @keyframes pulse { 0%{transform:scale(1);opacity:.4;} 70%{transform:scale(1.8);opacity:0;} 100%{opacity:0;} }
@@ -187,6 +187,7 @@
   .logo-item:hover { background:var(--bg2); }
   .logo-item img { max-height:48px; max-width:140px; object-fit:contain; opacity:.55; filter:grayscale(1); transition:opacity .2s, filter .2s; }
   .logo-item:hover img { opacity:1; filter:grayscale(0); }
+  .logo-item img[alt="Prodin"], .logo-item img[title="Prodin"], .logo-item img[alt="Linio Plan"], .logo-item img[title="Linio Plan"] { opacity:.82; filter:grayscale(1) contrast(1.3); }
 
   /* CONTACT */
   .contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
