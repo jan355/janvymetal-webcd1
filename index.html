@@ -160,8 +160,28 @@
   .service-card p { font-size:14px; color:var(--muted); line-height:1.65; flex:1; margin-bottom:1.5rem; }
   .tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1.5rem; }
   .tag { font-size:12px; padding:3px 9px; border-radius:100px; background:var(--accent-soft); color:var(--accent); border:0.5px solid rgba(45,90,61,0.15); }
+  .worksheet-note { margin-top:1.5rem; padding:1.25rem; border:0.5px solid var(--border); border-radius:16px; background:var(--bg2); }
+  .worksheet-note h3 { font-size:1rem; margin-bottom:.45rem; }
+  .worksheet-note p { font-size:14px; color:var(--muted); line-height:1.65; margin:0; }
+  .worksheet-meta { font-size:13px; color:var(--muted); margin:.35rem 0 1rem; line-height:1.6; }
+  .worksheet-prompt { margin:1rem 0; border:0.5px solid var(--border); border-radius:14px; background:#fff; overflow:hidden; }
+  .worksheet-prompt-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.75rem .9rem; border-bottom:0.5px solid var(--border); }
+  .worksheet-prompt-head h4 { font-size:13px; color:var(--accent); text-transform:uppercase; letter-spacing:.1em; }
+  .copy-prompt { border:0.5px solid var(--border-strong); border-radius:100px; background:transparent; color:var(--ink); padding:.45rem .8rem; font:inherit; font-size:12px; cursor:pointer; transition:color .2s, border-color .2s; white-space:nowrap; }
+  .copy-prompt:hover { color:var(--accent); border-color:var(--accent); }
+  .worksheet-prompt pre { margin:0; padding:1rem; white-space:pre-wrap; font-family:'Manrope','Avenir Next','Avenir',sans-serif; font-size:13.5px; line-height:1.65; color:var(--ink); }
+  .worksheet-prompt-body { position:relative; max-height:5.5rem; overflow:hidden; transition:max-height .25s; }
+  .worksheet-prompt-body::after { content:''; position:absolute; left:0; right:0; bottom:0; height:2.8rem; background:linear-gradient(rgba(255,255,255,0), #fff); pointer-events:none; }
+  .worksheet-prompt.revealed .worksheet-prompt-body { max-height:32rem; }
+  .worksheet-prompt.revealed .worksheet-prompt-body::after { display:none; }
+  .worksheet-partner { margin-top:1rem; }
+  .adoption-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; margin-top:2rem; background:var(--border); border:0.5px solid var(--border); border-radius:16px; overflow:hidden; }
+  .adoption-card { background:var(--bg); padding:1.5rem; }
+  .adoption-card h3 { font-size:1.05rem; font-weight:700; margin-bottom:.5rem; }
+  .adoption-card p { font-size:14px; color:var(--muted); line-height:1.65; }
   .service-link { font-size:14px; font-weight:500; color:var(--ink); display:inline-flex; align-items:center; gap:5px; transition:gap .15s, color .15s; margin-top:auto; }
   .service-link:hover { color:var(--accent); gap:9px; }
+  button.service-link { border:none; background:transparent; padding:0; font-family:inherit; cursor:pointer; }
 
   /* PROBLEMS (dark) */
   .problems-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; margin-top:3rem; background:rgba(255,255,255,0.07); border-radius:16px; overflow:hidden; }
@@ -337,73 +357,130 @@
     <div class="focus-card"><div class="focus-num">01</div><h3>Kurzy &amp; semináře</h3><p>Skupinová školení k AI pro projektanty. Prakticky, s příklady a daty z projekce.</p></div>
     <div class="focus-card"><div class="focus-num">02</div><h3>Individuální konzultace</h3><p>Váš projekční pracovní proces nastavený s AI. AI asistenti, skriptování Excel a CAD, koordinace profesí.</p></div>
     <div class="focus-card"><div class="focus-num">03</div><h3>Metodika &amp; bezpečnost</h3><p>Nastavení bezpečné práce s firemními daty a sjednocení používání AI napříč celým týmem.</p></div>
-    <div class="focus-card"><div class="focus-num">04</div><h3>Agentická AI</h3><p>Pro ty, kdo chtějí víc: Claude Cowork, Code, Codex, Cursor, Antigravity. AI agenti pro kancelář.</p></div>
+    <div class="focus-card"><div class="focus-num">04</div><h3>Zavádění AI do praxe firmy</h3><p>Pracovní postupy, AI šampion a měsíční měření toho, co se v týmu skutečně používá.</p></div>
   </div>
 </section>
 
 <section class="section" id="sluzby">
   <span class="label">Služby</span>
   <h2>Vyberte si formu spolupráce.</h2>
-  <p class="lead">Začneme tam, kde jste. V nástroji, který znáte, nebo v něčem úplně novém.</p>
+  <p class="lead">Kurz je vstup. Smysl má tehdy, když se z něj stanou pracovní postupy, které firma používá i po odchodu lektora.</p>
   <div class="services-grid">
     <div class="service-card featured">
       <div class="service-level">Úroveň 1</div>
-      <h3>Skupinový jednodenní kurz</h3>
-      <p class="desc">Praktický, firemní kurz pro projektanty s různou zkušeností práce s AI.</p>
+      <h3>Skupinový kurz</h3>
+      <p class="desc">Praktický firemní kurz pro projektanty s různou zkušeností práce s AI.</p>
       <ul class="svc-list">
-        <li>prompty pro projektanty</li>
+        <li>prompty a pracovní postupy pro projektanty</li>
         <li>vybrané případy práce s AI v projekci</li>
-        <li>aktuální reálné použití: AI + text + CAD</li>
-        <li>sjednocení používání AI napříč týmem</li>
-        <li>propojení metodiky, licencí a IT pravidel</li>
+        <li>reálné použití: AI + text + CAD</li>
+        <li>sjednocení používání AI v týmu</li>
+        <li>nominace interního AI šampiona</li>
+        <li>plán návazné podpory</li>
         <li>individuální příprava kurzu</li>
       </ul>
       <p class="svc-meta">Prezenčně, do 12 osob, v sídle zákazníka.</p>
-      <div class="tags"><span class="tag">Různé AI</span><span class="tag">Automatizace práce s PD</span><span class="tag">Skriptování</span><span class="tag">Vizualizace</span><span class="tag">Stavba asistentů</span></div>
+      <div class="tags"><span class="tag">Cena na poptávku</span><span class="tag">Pracovní postupy</span><span class="tag">AI šampion</span></div>
       <a href="#kontakt" class="service-link">Zjistit více →</a>
     </div>
     <div class="service-card">
       <div class="service-level">Úroveň 2</div>
-      <h3>Individuální konzultace, online</h3>
-      <p class="desc">Individuální podpora k nastavení pracovního procesu s AI. Pro jednotlivce i pro firmy.</p>
+      <h3>Individuální konzultace</h3>
+      <p class="desc">Cílená práce nad konkrétním případem práce s AI. Pro jednotlivce, šampiona nebo menší tým.</p>
       <ul class="svc-list">
-        <li>mapování denní práce, k zapojení AI</li>
-        <li>výběr konkrétních případů k nasazení AI</li>
-        <li>prompty pro projekci</li>
-        <li>automatizace rutinních činností</li>
-        <li>vytváření profesních znalostních bází s AI</li>
-        <li>nastavení bezpečnosti práce s AI</li>
+        <li>rozbor současného pracovního postupu</li>
+        <li>návrh přesného promptu a kontrolního kroku</li>
+        <li>úprava postupu pro vaši profesi a dokumentaci</li>
+        <li>nastavení bezpečné práce s podklady</li>
+        <li>příprava postupu pro sdílení v týmu</li>
       </ul>
-      <p class="svc-meta">1–3 hod, intenzivní práce online.</p>
-      <div class="tags"><span class="tag">Projekční procesy s AI</span><span class="tag">AI asistenti</span><span class="tag">Excel, CAD skripty</span><span class="tag">Koordinace profesí</span><span class="tag">Hledání řešení s AI</span></div>
+      <p class="svc-meta">Online nebo prezenčně podle zadání.</p>
+      <div class="tags"><span class="tag">Cena na poptávku</span><span class="tag">Konkrétní případ práce s AI</span><span class="tag">Úprava pro tým</span></div>
       <a href="#kontakt" class="service-link">Zjistit více →</a>
     </div>
     <div class="service-card">
       <div class="service-level">Úroveň 3</div>
-      <h3>Agentická AI, konzultace online</h3>
-      <p class="desc">Vlastní AI agenti, pokročilá automatizace a mini-aplikace pro projekční kancelář. Pro jednatele, vedoucí, nadšence a vizionáře, kteří chtějí maximum.</p>
+      <h3>Rozvojový AI partner firmy</h3>
+      <p class="desc">Měsíční rytmus, který udržuje AI v provozu: práce se šampionem, aktualizace pracovních listů a report pro vedení.</p>
       <ul class="svc-list">
-        <li>pokročilé plánování stavby automatizací</li>
-        <li>metodika práce v různých nástrojích</li>
-        <li>stavba mini-aplikací pro projekci</li>
-        <li>stavba, nebo rozšíření vašich web stránek</li>
-        <li>možnost přidat se do profesní komunity</li>
+        <li>pravidelné setkání s AI šampionem</li>
+        <li>aktualizace pracovních listů podle praxe</li>
+        <li>měsíční report metrik pro vedení</li>
+        <li>rozvoj pokročilých postupů a AI asistentů</li>
+        <li>agentická AI jako navazující fáze, pokud dává smysl</li>
       </ul>
-      <p class="svc-meta">1–3 hod intenzivní práce online. Vše bez znalosti programování.</p>
-      <div class="tags"><span class="tag">Analýza a plán s AI</span><span class="tag">Claude Cowork</span><span class="tag">Cursor</span><span class="tag">Antigravity</span><span class="tag">AI agenti</span></div>
+      <p class="svc-meta">Průběžná spolupráce v měsíčním režimu.</p>
+      <div class="tags"><span class="tag">Cena na poptávku</span><span class="tag">AI v denní praxi</span><span class="tag">Report pro vedení</span></div>
       <a href="#kontakt" class="service-link">Zjistit více →</a>
     </div>
+  </div>
+  <div class="worksheet-note">
+    <h3>Pracovní list PL-01 — Kontrola technické zprávy proti výkresům</h3>
+    <p>Projektantům je zpočátku těžké dát AI přesné zadání. Pracovní listy to řeší: vychází z katalogu pracovních postupů, které sbírám na kurzech a konzultacích při řešení situací z praxe.</p>
+    <div class="worksheet-meta"><strong>Příklad pracovního listu:</strong> PL-01 — Kontrola technické zprávy proti výkresům<br><strong>Případ práce s AI:</strong> kontrola dokumentace | <strong>Nástroj:</strong> analytická AI (NotebookLM nebo obdobná) | <strong>Vstupy:</strong> technická zpráva + výkresy exportované do PDF</div>
+
+    <div class="worksheet-prompt">
+      <div class="worksheet-prompt-head">
+        <h4>1. Přesný prompt (zkopíruj a uprav)</h4>
+        <button class="copy-prompt" type="button" data-copy-target="pl01-prompt">Zobrazit a zkopírovat ukázkový prompt</button>
+      </div>
+      <div class="worksheet-prompt-body"><pre id="pl01-prompt">Jsi zkušený technický auditor projektové dokumentace.
+Nahrál jsem technickou zprávu a výkresy objektu [DOPLŇ: číslo a název objektu].
+Porovnej technickou zprávu s výkresy. Nezajímají mě shody — vypiš pouze rozpory, nejasnosti a chybějící informace.
+Postupuj takto: projdi technickou zprávu po částech a každou informaci (čísla, počty, názvy prvků, odkazy) dohledej ve výkresech. Když informaci nenajdeš, napiš „nenalezeno". Když najdeš jinou hodnotu, vypiš rozdíl.
+U každého bodu uveď zdroj (dokument, strana/výkres) a označ jistotu: jasný rozpor / nejisté / nutná odborná kontrola.
+Výstup dej do tabulky.</pre></div>
+    </div>
+
+    <p class="worksheet-partner">Celý pracovní list (anotace, úprava pro sebe, kontrola, měření úspory) je v <button class="service-link" type="button" data-partner-open>Partnerské sekci →</button></p>
   </div>
   <p style="margin-top:2rem;font-size:14px;color:var(--muted);">Nevíte, co vybrat? <a href="#kontakt" style="color:var(--accent);font-weight:500;">Domluvme si hovor →</a></p>
 </section>
 
-<section class="section section-dark">
+<section class="section section-alt" id="ai-sampion">
+  <span class="label">AI šampion</span>
+  <h2>Jeden člověk drží změnu uvnitř firmy.</h2>
+  <div class="adoption-grid">
+    <div class="adoption-card">
+      <h3>Kdo to je</h3>
+      <p>AI šampion je aktivní zaměstnanec, který po kurzu udržuje a šíří pracovní postupy s AI uvnitř firmy. Může otevřít krátké okno na poradě, sbírat náměty od kolegů a vracet je do praxe.</p>
+    </div>
+    <div class="adoption-card">
+      <h3>Co dostane</h3>
+      <p>Dostane pracovní listy, přístup přes tlačítko Partnerská sekce a moji podporu v zádech. Nezůstane s tématem sám a má z čeho vycházet při zavádění postupů do týmu.</p>
+    </div>
+    <div class="adoption-card">
+      <h3>Proč to funguje</h3>
+      <p>Postupy vysvětluje kolega, který zná běžnou práci firmy. Ne IT, ne externista, ale člověk, kterému ostatní rozumí a kterého se mohou ptát průběžně.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mereni-adopce">
+  <span class="label">AI v praxi — čísla</span>
+  <h2>Vedení dostává čísla, ne dojmy.</h2>
+  <p class="lead">Součástí návazné spolupráce je měsíční report. Ukazuje, jestli se pracovní postupy s AI opravdu používají.</p>
+  <div class="adoption-grid">
+    <div class="adoption-card">
+      <h3>Aktivní uživatelé</h3>
+      <p>Kolik lidí ve firmě v daném měsíci pracovalo s dohodnutými AI postupy.</p>
+    </div>
+    <div class="adoption-card">
+      <h3>Použité pracovní postupy</h3>
+      <p>Kolik postupů z pracovních listů tým reálně použil na konkrétních úkolech.</p>
+    </div>
+    <div class="adoption-card">
+      <h3>Ušetřené hodiny</h3>
+      <p>Odhad času, který se za měsíc ušetřil díky opakovanému použití postupů.</p>
+    </div>
+  </div>
+</section><section class="section section-dark">
   <span class="label label-light">Znáte to?</span>
   <h2 style="color:#fff;">Projektant se chce soustředit hlavně na navrhování a řešení technických výzev.</h2>
   <p class="lead lead-light">Za léta spolupráce s projekčními týmy jsem vytipoval přesně ty úkoly, které dnes umíme pomocí AI bezpečně a výrazně zrychlit.</p>
   <div class="problems-grid">
     <div class="prob-card"><div class="prob-icon">📄</div><h3>Projektová dokumentace</h3><p>Automatizace tvorby fází PD, technické zprávy a analýza a třídění požadavků.</p></div>
-    <div class="prob-card"><div class="prob-icon">📋</div><h3>Hledání v normách</h3><p>ČSN, Eurokódy, TP i TPG, vyhlášky... orientace v platné legislativě. Přehlednější orientace v požadavcích a předpisech.</p></div>
+    <div class="prob-card"><div class="prob-icon">📋</div><h3>Hledání v normách</h3><p>ČSN, Eurokódy, TP i TKP, vyhlášky... orientace v platné legislativě. Přehlednější orientace v požadavcích a předpisech.</p></div>
     <div class="prob-card"><div class="prob-icon">📧</div><h3>E-maily a komunikace</h3><p>Zprávy investorům, úřadům, subdodavatelům. Přesnější souhrny, zrychlení komunikace a administrace.</p></div>
     <div class="prob-card"><div class="prob-icon">🔄</div><h3>Koordinace profesí</h3><p>Architektura, statika, TZB, silniční návrh i požární bezpečnost. Zlepšení systému synchronizace.</p></div>
     <div class="prob-card"><div class="prob-icon">⏱</div><h3>Opakující se rutina</h3><p>Výkazy, reporty, šablony, skripty. Nově práce pro AI asistenta.</p></div>
@@ -495,15 +572,36 @@
     });
   });
 
+  document.querySelectorAll('.copy-prompt').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const target = document.getElementById(button.dataset.copyTarget);
+      if (!target) return;
+      const originalText = button.textContent;
+      button.closest('.worksheet-prompt')?.classList.add('revealed');
+      try {
+        await navigator.clipboard.writeText(target.textContent.trim());
+      } catch (error) {
+        const input = document.createElement('textarea');
+        input.value = target.textContent.trim();
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        input.remove();
+      }
+      button.textContent = 'Zkopírováno';
+      window.setTimeout(() => { button.textContent = originalText; }, 1600);
+    });
+  });
+
   (function() {
     const modal = document.querySelector('#partner-login');
-    const openButton = document.querySelector('[data-partner-open]');
+    const openButtons = document.querySelectorAll('[data-partner-open]');
     const closeButton = document.querySelector('[data-partner-close]');
     const form = document.querySelector('[data-partner-form]');
     const note = document.querySelector('[data-partner-note]');
     const emailInput = modal?.querySelector('input[type="email"]');
 
-    if (!modal || !openButton || !closeButton || !form || !note) return;
+    if (!modal || !openButtons.length || !closeButton || !form || !note) return;
 
     function openModal() {
       modal.classList.add('is-open');
@@ -519,7 +617,9 @@
       note.textContent = '';
     }
 
-    openButton.addEventListener('click', openModal);
+    openButtons.forEach((openButton) => {
+      openButton.addEventListener('click', openModal);
+    });
     closeButton.addEventListener('click', closeModal);
     modal.addEventListener('click', (event) => {
       if (event.target === modal) closeModal();
