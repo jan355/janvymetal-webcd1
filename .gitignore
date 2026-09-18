@@ -1,0 +1,12 @@
+# zálohy a pracovní soubory
+index.backup-*.html
+*.bak
+temp_*
+# nikdy do repozitáře: pracovní listy a klientské podklady
+PL-*
+*.docx
+*.pdf
+*.zip
+# systém
+.DS_Store
+Thumbs.db
